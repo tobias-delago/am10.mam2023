@@ -2,8 +2,15 @@ library(tidyverse)
 library(vroom)
 library(extrafont)
 library(ggtext)
+library(remotes)
 
+
+remotes::install_version("Rttf2pt1", version = "1.3.8")
+
+font_import()
 loadfonts(device="win")
+
+
 
 # source of data https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-08-13
 url <- "https://github.com/rfordatascience/tidytuesday/raw/master/data/2019/2019-08-13/emperors.csv"
@@ -49,20 +56,21 @@ emperors %>%
     colour = "white",
     size = 5,
     hjust = 1,
-    family="Lato" # change font; if you havent installed extra fonts, comment this line out
+    family="Roboto" # change font; if you havent installed extra fonts, comment this line out
   ) +
   theme_minimal() +
   theme(
     axis.title.y = element_blank(),
     legend.position = "none"
   ) +
-  theme(text=element_text(size=16, family="Lato"))+
+  theme(text=element_text(size=16, family="Roboto"))+
   labs(
     title = "Cause of death of Roman Emperors",
     x= "number of emperors")+
   
   # ensure title is top-left aligned
   theme(plot.title.position = "plot")+
+  theme(plot.title = element_text(face="bold"))+
   NULL
 
 
@@ -77,7 +85,7 @@ emperors_assassinated <- emperors %>%
   )
 
 #define colours to use: grey for everything, tomato for assassination
-my_colours <- c("grey80", "tomato")
+my_colours <- c("grey80", "tomato")                                   #the first False and the second True
 
 #if you want to use hex codes, gplots::col2hex("colour name") will give you hex code
 # grey70 = #B3B3B3, tomato = #FF6347
@@ -95,18 +103,18 @@ emperors_assassinated %>%
     colour = "white",
     size = 5,
     hjust = 1,
-    family="Lato"
+    family="Roboto"
   ) +
   theme_minimal() +
   theme(
     axis.title.y = element_blank(),
     legend.position = "none"
   ) +
-  theme(text=element_text(size=12, family="Lato"))+
+  theme(text=element_text(size=12, family="Roboto"))+
   theme(plot.title.position = "plot")+
   
   # change font colour 
-  labs(colour = "assassination",
+  labs(#colour = "assassination",
        title = "<b> Cause of death of Roman emperors</b><br>
        <span style = 'font-size:12pt'>Roughly half of the emperors died of <span style='color:#FF6347'>assassination</span> and <span style='color:#FF6347'>execution </span>.</span>",
        x= "Number of emperors",
@@ -129,7 +137,7 @@ emperors_assassinated %>%
     data = data.frame(x = 15, y = 3, label = label),
     aes(x = x, y = y, label = label),
     colour="#FF6347",
-    family="Lato",
+    family="Roboto",
     hjust = 0.5,
     lineheight = .8,
     inherit.aes = FALSE,

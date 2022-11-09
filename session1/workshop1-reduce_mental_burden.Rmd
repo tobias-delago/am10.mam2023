@@ -1,6 +1,6 @@
 ---
 title: "Reduce mental burden in plots"
-author: "Your name goes here"
+author: "Tobias Delago"
 date: "`r Sys.Date()`"
 output:
   html_document:
@@ -41,7 +41,8 @@ library(patchwork)
 library(gghighlight)
 library(skimr)
 
-# remotes::install_github("kjhealy/nycdogs")
+
+remotes::install_github("kjhealy/nycdogs")
 library(nycdogs)
 library(sf) # for geospatial visualisation
 
@@ -111,7 +112,7 @@ emperor_killers %>%
 2. In the `mutate()` call, check if `country` is one of the countries in `some_countries`. If it's not, make the label an empty string (""),
 3. Add the text repel geom from ggrepel. Set the `label` aesthetic using the variable just created in `mutate()`
 
-```{r, gapminder_some_countries, eval = FALSE}
+```{r, gapminder_some_countries}
 # make sure you remove eval=FALSE before knitting the document
 
 set.seed(42)
@@ -148,7 +149,7 @@ gapminder %>%
 gapminder %>%
   filter(year == 2007) %>%
   mutate(
-    label = ifelse(______  %in% _____, as.character(country), _____________ )
+    label = ifelse(country  %in% some_countries, as.character(country), "" )
   ) %>%
   ggplot(aes(log(gdpPercap), lifeExp)) +
     geom_point(
